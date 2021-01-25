@@ -96,11 +96,11 @@ export class AddPropertyComponent implements OnInit {
       console.log(this.addPropertyForm);
 
       if(this.SellRent.value === '2') {
+        // this.housingService.getSellRentProperties()
         this.router.navigate(['/rent-property']);
-        this.housingService.getSellRentProperties()
       } else {
+        // this.housingService.getSellRentProperties()
         this.router.navigate(['/']);
-        this.housingService.getSellRentProperties()
       }
 
     } else {

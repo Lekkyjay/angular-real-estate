@@ -16,9 +16,12 @@ export class NavBarComponent implements OnInit {
   constructor(private authService: AuthService, private hService: HousingService) { }
 
   ngOnInit(): void {
-    this.hService.getSellRentProperties().subscribe(properties => {
-      this.sellNum = properties.filter(p => p.SellRent === 1).length
-      this.rentNum = properties.filter(p => p.SellRent === 2).length
+    this.hService.getSellRentProperties()   //Initial trigger for behaviorSubject
+    this.hService.sellRentTotal$.subscribe(properties => {
+      if (properties) {
+        this.sellNum = properties.filter(p => p.SellRent === 1).length
+        this.rentNum = properties.filter(p => p.SellRent === 2).length
+      }
     })
   }
 

@@ -10,7 +10,6 @@ import { HousingService } from 'src/app/services/housing.service';
 export class PropertyListComponent implements OnInit {
 
   properties: any
-  testProperties: Array<any>
   SellRent = 1;
   Today = new Date()
   City = '';
@@ -27,11 +26,6 @@ export class PropertyListComponent implements OnInit {
 
     this.properties = this.housingService.getAllProperties(this.SellRent)
 
-    this.housingService.getTestProperties(this.SellRent).subscribe(
-      data => {
-        this.testProperties = data
-      }
-    )
   }
 
   onCityFilter() {

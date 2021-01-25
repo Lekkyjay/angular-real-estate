@@ -16,3 +16,12 @@
   display: inline-block;
   margin-bottom: 20px;
 }
+
+.contact-details {
+  display: flex;
+}
+
+.contact-details p:first-child {
+  width: 100px;
+  font-weight: bold;
+}

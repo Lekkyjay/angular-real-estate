@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Property } from '../models/property';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HousingService {
 
-  
+  sellRentTotal = new BehaviorSubject<any[]>(null)
+  sellRentTotal$ = this.sellRentTotal.asObservable()
+  total: any[]
 
   constructor(private http: HttpClient) { }
 
@@ -54,7 +57,7 @@ export class HousingService {
   }
 
   getSellRentProperties() {
-    return this.http.get('assets/properties.json').pipe(
+    this.http.get('assets/properties.json').pipe(
       map(data => {
         const allPropertiesArray: Array<any> = []
         const localProperties = JSON.parse(localStorage.getItem('newProp'));
@@ -70,21 +73,7 @@ export class HousingService {
         }
         return allPropertiesArray
       })
-    )
-  }
-
-  getTestProperties(SellRent: number) {
-    return this.http.get('assets/properties.json').pipe(
-      map(data => {
-        const propertiesArray: Array<any> = []
-        for (const id in data) {
-          if (data.hasOwnProperty(id) && data[id].SellRent === SellRent) {
-            propertiesArray.push(data[id])
-          }          
-        }
-        return propertiesArray
-      })
-    )
+    ).subscribe(allProperties => this.sellRentTotal.next(allProperties))
   }
 
   addProperty(property: Property) {
@@ -95,6 +84,7 @@ export class HousingService {
     }
 
     localStorage.setItem('newProp', JSON.stringify(newProp));
+    this.getSellRentProperties();
   }
 
   newPropID() {
