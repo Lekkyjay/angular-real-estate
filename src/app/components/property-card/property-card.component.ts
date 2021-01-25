@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { PropertyI } from 'src/app/models/property-i';
 
 @Component({
   selector: 'app-property-card',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./property-card.component.css']
 })
 export class PropertyCardComponent implements OnInit {
+
+  @Input() property: PropertyI;
+  @Input() hideIcons: boolean;
 
   constructor() { }
 

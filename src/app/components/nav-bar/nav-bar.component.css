@@ -1,0 +1,19 @@
+.navbar {
+  margin-bottom: 40px;
+  height: 60px;
+}
+
+.navbar ul {
+  list-style: none;
+}
+
+.navbar .login a {
+  text-decoration: none;
+  padding: 5px;
+}
+
+ul.dropdown-ul {
+  margin-right: 30px;
+  position: relative;
+  top: 10px;
+}

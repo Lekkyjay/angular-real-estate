@@ -1,1 +1,54 @@
-<p>property-list works!</p>
+<!-- <label>Filter City: &nbsp; </label>
+<input [(ngModel)]='City'>
+<button type="button" (click)="onCityFilter()">Search</button>
+<button type="button" (click)="onCityFilterClear()">Clear</button> &nbsp;
+
+<label>Sort by &nbsp;</label>
+<select [(ngModel)] = 'SortbyParam'>
+  <option value="City">City</option>
+  <option value="Price">Price</option>
+</select>
+<button type="button" (click) = "onSortDirection()">
+  <i *ngIf="SortDirection==='asc'" class="bi bi-caret-down"></i>
+  <i *ngIf="SortDirection==='desc'" class="bi bi-caret-up"></i>
+</button> -->
+
+<div class="row filter-sort">
+  <div class="col">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Filter City" [(ngModel)]='City'>
+      <button class="btn btn-outline-secondary" type="button" (click)="onCityFilter()">Filter</button>
+      <button class="btn btn-outline-secondary" type="button" (click)="onCityFilterClear()">Clear</button>
+    </div>
+  </div>
+  <div class="col d-flex sort-select">
+    <label>Sort by &nbsp;</label>
+    <select [(ngModel)] = 'SortbyParam' class="form-select">
+      <option value="City">City</option>
+      <option value="Price">Price</option>
+    </select>
+    <button class="btn btn-outline-secondary" type="button" (click) = "onSortDirection()">
+      <i *ngIf="SortDirection==='asc'" class="bi bi-sort-alpha-down"></i>
+      <i *ngIf="SortDirection==='desc'" class="bi bi-sort-alpha-up"></i>
+    </button>
+  </div>
+
+  <!-- <div class="col">
+    <select class="form-select">
+      <option selected>Open this select menu</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+  </div> -->
+</div>
+
+<div class="row">
+  <div *ngFor="let property of properties | async | filter:SearchCity:'City' | sort: [SortbyParam,SortDirection]"
+  class="col-sm-4">
+    <div class="shadow-lg p-3 mb-4">
+        <app-property-card [property]="property"></app-property-card>
+    </div>
+</div>
+</div>
+

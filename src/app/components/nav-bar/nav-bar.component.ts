@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { HousingService } from 'src/app/services/housing.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  loggedinUser: string;
+  sellNum: number
+  rentNum: number
+
+  constructor(private authService: AuthService, private hService: HousingService) { }
 
   ngOnInit(): void {
+    this.hService.getSellRentProperties().subscribe(properties => {
+      this.sellNum = properties.filter(p => p.SellRent === 1).length
+      this.rentNum = properties.filter(p => p.SellRent === 2).length
+    })
+  }
+
+  loggedin() {
+    this.loggedinUser = localStorage.getItem('token');
+    return this.loggedinUser;
+    console.log(this.loggedinUser)
+  }
+
+  onLogout() {
+    localStorage.removeItem('token');
+    this.authService.onSuccess("You are logged out !");
   }
 
 }

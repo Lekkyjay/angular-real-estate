@@ -1,1 +1,27 @@
-<p>property-card works!</p>
+<div class="card">
+  <div class="card-image">
+    <img *ngIf="property.Image"  src="assets/images/{{ property.Image }}.png">
+    <img *ngIf="!property.Image" src="assets/images/house_default.png" width="100%">
+    <div *ngIf="!hideIcons" class="card-image-icons">
+      <a routerLink="/property-detail/{{property.Id}}" class="icon">
+        <i class="bi bi-info-circle"></i>
+      </a>
+      <a routerLink="/property-detail/{{property.Id}}">
+        <i class="bi bi-envelope"></i>
+      </a>
+    </div>
+  </div>
+  <div class="card-content p-2">
+    <h3 class="text-primary"> {{property.BHK}} Room {{property.PType}} </h3>
+    in {{property.Name}}
+    <span *ngIf="property.Name">,</span>
+    {{property.City}}
+
+    <h6  class="mt-2">{{property.FType}}
+    <span *ngIf="property.FType !== 'Unfurnished'">Furnished</span> | Ready to Move</h6>
+
+    <hr class="mt-0 mb-2">
+
+    <h6 class="mb-0">Price: <span class="text-primary">{{property.Price}} USD.</span> |
+      Area:  <span class="text-primary">{{property.BuiltArea}} Sq Ft </span> </h6>
+</div>

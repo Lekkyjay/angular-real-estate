@@ -1,7 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+
 import { AppComponent } from './app.component';
 import { AddPropertyComponent } from './components/add-property/add-property.component';
 import { PropertyCardComponent } from './components/property-card/property-card.component';
@@ -28,7 +38,16 @@ import { SortPipe } from './pipes/sort.pipe';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxGalleryModule,
+    TabsModule.forRoot(),
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
+    ButtonsModule.forRoot(),
+    SimpleNotificationsModule.forRoot({ position: ["top", "right"] })
   ],
   providers: [],
   bootstrap: [AppComponent]
