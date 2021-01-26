@@ -1,7 +1,10 @@
 <div class="card">
   <div class="card-image">
-    <img *ngIf="property.Image"  src="assets/images/{{ property.Image }}.png">
-    <img *ngIf="!property.Image" src="assets/images/house_default.png" width="100%">
+    <img *ngIf="property.Image"  src="{{ property.Image }}">
+    <img 
+      *ngIf="!property.Image" 
+      src="https://icons-for-free.com/iconfiles/png/512/house+snow+winter+wooden+house+icon-1320184383873819224.png" 
+      width="100%">
     <div *ngIf="!hideIcons" class="card-image-icons">
       <a routerLink="/property-detail/{{property.Id}}" class="icon">
         <i class="bi bi-info-circle"></i>
