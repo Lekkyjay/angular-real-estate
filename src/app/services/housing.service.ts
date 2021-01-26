@@ -24,7 +24,7 @@ export class HousingService {
   }
 
   getAllProperties(SellRent?: number) {
-    return this.http.get('assets/properties.json').pipe(
+    return this.http.get('/assets/properties.json').pipe(
       map(data => {
         const propertiesArray: Array<any> = []
         const localProperties = JSON.parse(localStorage.getItem('newProp'));
@@ -57,7 +57,7 @@ export class HousingService {
   }
 
   getSellRentProperties() {
-    this.http.get('assets/properties.json').pipe(
+    this.http.get('/assets/properties.json').pipe(
       map(data => {
         const allPropertiesArray: Array<any> = []
         const localProperties = JSON.parse(localStorage.getItem('newProp'));
