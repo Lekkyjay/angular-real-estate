@@ -27,6 +27,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { SortPipe } from './pipes/sort.pipe';
 
 import { environment } from 'src/environments/environment';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { environment } from 'src/environments/environment';
     NavBarComponent,
     FilterPipe,
     SortPipe,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
