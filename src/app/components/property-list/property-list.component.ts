@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { HousingService } from 'src/app/services/housing.service';
 
 @Component({
@@ -7,7 +9,7 @@ import { HousingService } from 'src/app/services/housing.service';
   templateUrl: './property-list.component.html',
   styleUrls: ['./property-list.component.css']
 })
-export class PropertyListComponent implements OnInit {
+export class PropertyListComponent implements OnInit, OnDestroy {
 
   properties: any
   SellRent = 1;
@@ -16,16 +18,25 @@ export class PropertyListComponent implements OnInit {
   SearchCity = '';
   SortbyParam = '';
   SortDirection = 'asc';
-
-  constructor(private route: ActivatedRoute, private housingService: HousingService) { }
+  propertySubscription: Subscription  
+  
+  constructor(
+    private route: ActivatedRoute, 
+    private housingService: HousingService) { }
 
   ngOnInit(): void {
-    if (this.route.snapshot.url.toString()) {
-      this.SellRent = 2   //Means we are on rent-property URL else we are on base URL
-    }
-
-    this.properties = this.housingService.getAllProperties(this.SellRent)
-
+    this.propertySubscription = this.route.paramMap.pipe(
+      switchMap(params => {
+        let type = params.get('type')
+        return this.housingService.getProperties(type).snapshotChanges().pipe(
+          map(properties => 
+            properties.map(property => (
+              { Id: property.payload.doc.id, ...property.payload.doc.data() }
+            ))
+          )
+        )
+      })
+    ).subscribe(properties => this.properties = properties)
   }
 
   onCityFilter() {
@@ -43,6 +54,10 @@ export class PropertyListComponent implements OnInit {
     } else {
       this.SortDirection = 'desc';
     }
+  }
+
+  ngOnDestroy() {
+    this.propertySubscription.unsubscribe();
   }
 
 }

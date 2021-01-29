@@ -1,5 +1,14 @@
 {
+  "targets": {
+    "fir-angular-1babe": {
+      "hosting": {
+        "housing-app": [
+          "fir-angular-1babe"
+        ]
+      }
+    }
+  },
   "projects": {
-    "default": "e-comm-52c4f"
+    "staging": "fir-angular-1babe"
   }
 }

@@ -9,12 +9,11 @@ import { PropertyDetailResolverService } from './services/property-detail-resolv
 
 const routes: Routes = [
   {path: '', component: PropertyListComponent},
-  {path: '', component: PropertyListComponent},
-  {path: 'rent-property', component: PropertyListComponent},
+  {path: 'properties/:type', component: PropertyListComponent},
   {path: 'add-property', component: AddPropertyComponent},
-  {path: 'property-detail/:id', 
-          component: PropertyDetailComponent, 
-          resolve: {prp: PropertyDetailResolverService}},
+  {path: 'property-detail/:id', component: PropertyDetailComponent 
+        /*  resolve: {prp: PropertyDetailResolverService} */
+        },
   {path: 'user/login', component: UserLoginComponent},
   {path: 'user/register', component: UserRegisterComponent},
   {path: '**', component: PropertyListComponent}

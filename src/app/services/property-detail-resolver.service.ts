@@ -14,8 +14,9 @@ export class PropertyDetailResolverService implements Resolve<Property> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):Observable<Property>|Property {
     const propId = route.params['id'];
-    return this.housingService.getProperty(+propId).pipe(   //It returns here an Observable of Property if there was no error from API
+    return this.housingService.getProperty(propId).pipe(   //It returns here an Observable of Property if there was no error from API
       catchError(error => {
+        console.log(error)
         this.router.navigate(['/']);
         return of(null);
       })

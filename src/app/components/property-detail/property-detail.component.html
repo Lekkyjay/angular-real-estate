@@ -2,7 +2,7 @@
   <div class="col-sm-4 p-0">
     <div class="card">
       <div class="card-img-wrapper">
-        <img *ngIf="property.Image" class="card-img-top" src="assets/images/{{property.Image}}.png">
+        <img *ngIf="property.Image" class="card-img-top" src="{{property.Image}}">
         <img *ngIf="!property.Image" class="card-img-top" src="assets/images/house_default.png">
       </div>
       <div class="card-body">

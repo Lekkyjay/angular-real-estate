@@ -15,6 +15,10 @@ export class UserLoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  login(frm: NgForm) {
+    this.authService.login(frm.value.email, frm.value.password);
+  }
+
   onLogin(loginForm: NgForm) {
     console.log(loginForm.value);
     const token = this.authService.authUser(loginForm.value); //returns authenticated user

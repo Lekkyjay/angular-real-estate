@@ -7,39 +7,90 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/">
-            Buy <span class="badge bg-primary">{{sellNum}}</span>
+          <a class="nav-link" routerLinkActive="active" routerLink="properties/sell">Buy
+            <span class="badge bg-primary">{{sellNum}}</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/rent-property">
-            Rent <span class="badge bg-primary">{{rentNum}}</span>
+          <a class="nav-link" routerLink="properties/rent">Rent 
+            <span class="badge bg-primary">{{rentNum}}</span>
           </a>
         </li>
+
+        <!-- <ng-container *ngIf="!myProps">
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="properties/sell">Buy
+              <span class="badge bg-primary">{{sellNum}}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="properties/rent">Rent 
+              <span class="badge bg-primary">{{rentNum}}</span>
+            </a>
+          </li>
+        </ng-container> -->
+
+        <!-- <ng-container *ngIf="myProps">
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="properties/msell">Buy
+              <span class="badge bg-primary">{{mySell}}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="properties/mrent">Rent 
+              <span class="badge bg-primary">{{myRent}}</span>
+            </a>
+          </li>
+        </ng-container> -->
+        
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/add-property">List Property</a>
         </li>
+
+        <li *ngIf="user$ | async as user" class="nav-item text-primary">{{ user.email }}</li>
+
+        <li *ngIf="properties$ | async as properties" class="nav-item text-primary">
+          {{ properties.length }}
+        </li>
+
       </ul>
       <ul class="d-flex login">
-        <li *ngIf="!loggedin()">
+        <li *ngIf="!user">
           <a routerLinkActive="active" routerLink="/user/login">Login</a>
         </li>
-        <li *ngIf="!loggedin()">
+        <li *ngIf="!user">
           <a routerLinkActive="active" routerLink="/user/register">Register</a>
         </li>
       </ul>
-      <ul class="dropdown-ul" *ngIf="loggedin()">
+      <ul class="dropdown-ul" *ngIf="user">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Welcome {{loggedinUser}}
+            Welcome {{ user.userName }}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">View Dashboard</a></li>
-            <li><a class="dropdown-item" href="#">My Profile</a></li>
-            <li><a class="dropdown-item" href="#">Change Password</a></li>
+            <li>
+              <a class="dropdown-item" routerLink="properties/my">
+                All <span class="badge bg-primary">{{ myRent }}</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#" routerLink="properties/mrent">
+                Rent
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#" routerLink="properties/msell">
+                Sell
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">
+                View Dashboard
+              </a>
+            </li>
             <li><hr class="dropdown-divider"></li>
             <li>
-              <a class="dropdown-item" href="#" (click)='onLogout()'>
+              <a class="dropdown-item" href="#" (click)='authService.logout()'>
                 Logout &nbsp; <i class="bi bi-box-arrow-right"></i>
               </a>
             </li>

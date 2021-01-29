@@ -29,7 +29,7 @@ export class UserRegisterComponent implements OnInit {
     this.regForm =  this.fb.group({
       userName: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(8)]],
+      password: [null, [Validators.required, Validators.minLength(6)]],
       confirmPassword: [null, Validators.required],
       mobile: [1234567890, [Validators.required, Validators.maxLength(10)]]
     }, {validators: this.passwordMatchingValidatior});
@@ -39,14 +39,28 @@ export class UserRegisterComponent implements OnInit {
     return fg.get('password').value === fg.get('confirmPassword').value ? null :
     {notmatched: true};
   }
-  
 
   onSubmit() {
+    console.log(this.regForm.value)
+    console.log('userData', this.userData())
+    this.userSubmitted = true
+    if (this.regForm.valid) {
+      this.authService.createUser(this.userData())
+      this.regForm.reset()
+      this.userSubmitted = false
+      this.authService.onSuccess('User created successfully')
+    } else {
+      this.authService.onError('Something went wrong!')
+    }
+  }
+   
+
+  onSubmitToLocalStorage() {
     console.log(this.regForm.value)
     this.userSubmitted = true
     if (this.regForm.valid) {
       // this.user = Object.assign(this.user, this.regForm.value)
-      this.userService.addUser(this.userData())   //stores user in localStprage
+      this.userService.addUser(this.userData())   //stores user in localStorage
       this.regForm.reset()
       this.userSubmitted = false
       this.authService.onSuccess('User created successfully')

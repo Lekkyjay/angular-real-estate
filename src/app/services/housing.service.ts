@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Property } from '../models/property';
 import { BehaviorSubject } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +14,86 @@ export class HousingService {
   sellRentTotal = new BehaviorSubject<any[]>(null)
   sellRentTotal$ = this.sellRentTotal.asObservable()
   total: any[]
+  userId: string
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private afs: AngularFirestore, private afa: AngularFireAuth,) { 
+    this.afa.authState.subscribe(user => this.userId = user.uid)
+  }
 
-  getProperty(id: number) {
-    return this.getAllProperties().pipe(
+  createProperty(property: Property, userId: string) {
+    let newProperty = Object.assign({}, {userId: userId}, property)
+    // let newProperty = {userId, ...property}
+    // console.log('userId:', userId)
+    // console.log('property:', property)
+    // console.log('newProperty:', newProperty)
+    return this.afs.collection('properties').add(newProperty);
+  }
+
+  getAllProperties() {
+    return this.afs.collection<Property>('properties')
+  }
+  
+  getProperties(type: string) {
+    console.log('I got here:', type)
+    switch(type) { 
+      case "sell": { 
+        return this.afs.collection<Property>('properties', ref => ref.where('SellRent', '==', 1)) 
+         break; 
+      } 
+      case "rent": { 
+        return this.afs.collection<Property>('properties', ref => ref.where('SellRent', '==', 2))
+         break; 
+      } 
+      case "msell": { 
+        return this.afs.collection<Property>('properties', ref => 
+        ref.where('SellRent', '==', 1).where('userId', '==', this.userId))
+         break; 
+      } 
+      case "mrent": { 
+        return this.afs.collection<Property>('properties', ref => 
+        ref.where('SellRent', '==', 2).where('userId', '==', this.userId))
+         break; 
+      } 
+      case "my": { 
+        return this.afs.collection<Property>('properties', ref => ref.where('userId', '==', this.userId))
+         break; 
+      } 
+      default: { 
+        return this.afs.collection<Property>('properties')
+         break; 
+      } 
+   } 
+  }
+
+  getProperty(id: string) {
+    return this.afs.doc(`properties/${id}`).valueChanges()
+  }
+
+  getMyProperties(id: string) {
+    return this.afs.collection<Property>('properties', ref => ref.where('userId', '==', id))
+  }
+
+
+
+
+
+
+
+
+
+
+
+  //Old code to be deleted at the end of project
+
+  ggetProperty(id: number) {
+    return this.getAllPropertiess().pipe(
       map(propertiesArray => {
         return propertiesArray.find(p => p.Id === id);
       })
     );
   }
 
-  getAllProperties(SellRent?: number) {
+  getAllPropertiess(SellRent?: number) {
     return this.http.get('/assets/properties.json').pipe(
       map(data => {
         const propertiesArray: Array<any> = []

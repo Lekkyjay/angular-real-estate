@@ -5,6 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
@@ -23,6 +26,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { SortPipe } from './pipes/sort.pipe';
 
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +39,7 @@ import { SortPipe } from './pipes/sort.pipe';
     UserRegisterComponent,
     NavBarComponent,
     FilterPipe,
-    SortPipe
+    SortPipe,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +52,10 @@ import { SortPipe } from './pipes/sort.pipe';
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot(),
-    SimpleNotificationsModule.forRoot({ position: ["top", "right"] })
+    SimpleNotificationsModule.forRoot({ position: ["top", "right"] }),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

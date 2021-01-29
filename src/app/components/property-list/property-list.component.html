@@ -13,6 +13,13 @@
   <i *ngIf="SortDirection==='desc'" class="bi bi-caret-up"></i>
 </button> -->
 
+<!-- <div *ngIf="authService.user$ | async as user;">
+  <pre>
+    {{ user | json }}
+  </pre>
+</div> -->
+
+
 <div class="row filter-sort">
   <div class="col">
     <div class="input-group">
@@ -43,8 +50,9 @@
   </div> -->
 </div>
 
+
 <div class="row">
-  <div *ngFor="let property of properties | async | filter:SearchCity:'City' | sort: [SortbyParam,SortDirection]"
+  <div *ngFor="let property of properties | filter:SearchCity:'City' | sort: [SortbyParam,SortDirection]"
   class="col-sm-4">
     <div class="shadow-lg p-3 mb-4">
         <app-property-card [property]="property"></app-property-card>

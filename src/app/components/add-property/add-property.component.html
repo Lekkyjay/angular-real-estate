@@ -76,6 +76,14 @@
                 </div>
 
                 <div class="form-group col-12 mt-4">
+                  <label>Image Url</label>
+                  <input type="text"
+                  formControlName="ImageUrl"
+                  [(ngModel)]="propertyView.Image"
+                  class="form-control">
+                </div>
+
+                <div class="form-group col-12 mt-4">
                   <label>Select Building/Society/Project</label>
                   <select
                   class="form-select"
@@ -241,7 +249,7 @@
                 class="form-group col-6">
                   <label>Possession/Avaialble From</label>
                   <input type="text"
-                  class="form-control"
+                  class="form-control mt-4"
                   formControlName="PossessionOn"
                   bsDatepicker
                   [bsConfig]="{containerClass: 'theme-dark-blue',
@@ -250,7 +258,7 @@
 
                 <div
                 *ngIf="RTM.value==1"
-                class="form-group col-3">
+                class="form-group col-3 mt-4">
                   <label>Age of Property</label>
                   <input type="text"
                   formControlName="AOP"
