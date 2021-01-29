@@ -19,13 +19,16 @@ export class NavBarComponent implements OnInit {
   loggedinUser: string;
   sellNum: number
   rentNum: number
+  all: number
   mySell: number
   myRent: number
+  myAll: number
   myProps: boolean
   user: UserI
   user$: any
   properties$: any
   currentRoute: string;
+  properties: any
 
 
   constructor(
@@ -79,6 +82,7 @@ export class NavBarComponent implements OnInit {
     // console.log('activatedRoute:', this.activatedRoute.snapshot.url.join(''))
 
     this.hService.getAllProperties().valueChanges().subscribe(properties => {
+      this.all = properties.length
       this.sellNum = properties.filter(p => p.SellRent === 1).length
       this.rentNum = properties.filter(p => p.SellRent === 2).length
     })
@@ -94,6 +98,7 @@ export class NavBarComponent implements OnInit {
     this.afa.authState.subscribe(user => {
       this.housingService.getMyProperties(user.uid).valueChanges().subscribe(
         properties => {
+          this.myAll = properties.length
           this.mySell = properties.filter(p => p.SellRent === 1).length
           this.myRent = properties.filter(p => p.SellRent === 2).length
         }
