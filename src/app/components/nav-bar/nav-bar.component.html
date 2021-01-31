@@ -6,21 +6,37 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">        
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/">All
-            <span class="badge bg-primary">{{all}}</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="properties/sell">Buy
-            <span class="badge bg-primary">{{sellNum}}</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="properties/rent">Rent 
-            <span class="badge bg-primary">{{rentNum}}</span>
-          </a>
-        </li>
+        <ng-container *ngIf="myProps; else allProps">
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="properties/mysell">Buy
+              <span class="badge bg-secondary" *ngIf="sellNum > 0">{{mySell}}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="properties/myrent">Rent 
+              <span class="badge bg-secondary" *ngIf="rentNum > 0">{{myRent}}</span>
+            </a>
+          </li>
+        </ng-container>
+
+        <ng-template #allProps>
+          <!-- <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="/">All
+              <span class="badge bg-secondary">{{all}}</span>
+            </a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="properties/sell">Buy
+              <span class="badge bg-secondary" *ngIf="sellNum > 0">{{sellNum}}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="properties/rent">Rent 
+              <span class="badge bg-secondary" *ngIf="rentNum > 0">{{rentNum}}</span>
+            </a>
+          </li>
+        </ng-template>        
+        
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/add-property">List Property</a>
         </li>        

@@ -140,14 +140,14 @@
                   </div>
 
                   <div *ngIf="SellRent.value==2">
-                    <div class="form-group col-12">
+                    <div class="form-group col-12 mt-4">
                       <label>Security (in USD)</label>
                       <input type="text"
                       formControlName="Security"
                       class="form-control">
                     </div>
 
-                    <div class="form-group col-12">
+                    <div class="form-group col-12 mt-4">
                       <label>Maintenance (in USD)</label>
                       <input type="text"
                       formControlName="Maintenance"
@@ -184,7 +184,6 @@
               </tab>
 
               <tab heading="Address" formGroupName="AddressInfo">
-
                 <div class="form-group col-12 mt-4">
                   <label>Floor</label>
                   <input type="text"
@@ -242,7 +241,6 @@
                     Please select ready to move
                   </div>
                 </div>
-
 
                 <div
                 *ngIf="RTM.value==2"

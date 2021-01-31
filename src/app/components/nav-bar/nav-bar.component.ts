@@ -36,13 +36,13 @@ export class NavBarComponent implements OnInit {
     this.router.events.subscribe((event:Event) => {
       if(event instanceof NavigationEnd ){
         console.log('event:', event.url);
-        (event.url === '/properties/msell' || 
-        event.url === '/properties/mrent' ||
+        (event.url === '/properties/mysell' || 
+        event.url === '/properties/myrent' ||
         event.url === '/properties/my') ? this.myProps = true : this.myProps = false
       }
     });
 
-    this.housingService.sellRentTotal$.subscribe(properties => {
+    this.housingService.getAllProperties().valueChanges().subscribe(properties => {
       console.log('properties:', properties)
       this.all = properties?.length
       this.sellNum = properties?.filter(p => p.SellRent === 1).length
@@ -59,8 +59,8 @@ export class NavBarComponent implements OnInit {
       .subscribe(
         properties => {
           this.myAll = properties.length
-          // this.mySell = properties.filter(p => p.SellRent === 1).length
-          // this.myRent = properties.filter(p => p.SellRent === 2).length
+          this.mySell = properties.filter(p => p.SellRent === 1).length
+          this.myRent = properties.filter(p => p.SellRent === 2).length
         }
       )       
   }

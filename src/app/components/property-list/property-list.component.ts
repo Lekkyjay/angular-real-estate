@@ -35,7 +35,6 @@ export class PropertyListComponent implements OnInit, OnDestroy {
         )
       })
     ).subscribe(properties => {
-      this.housingService.sellRentTotal.next(properties)
       this.properties = properties
     })
   }

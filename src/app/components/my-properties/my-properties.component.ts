@@ -29,7 +29,6 @@ export class MyPropertiesComponent implements OnInit {
         return this.housingService.getMyProperties(id).valueChanges()
       }))
       .subscribe(properties => {
-        this.housingService.sellRentTotal.next(properties)
         this.properties = properties
       })       
   }

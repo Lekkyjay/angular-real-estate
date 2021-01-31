@@ -17,3 +17,7 @@ ul.dropdown-ul {
   position: relative;
   top: 10px;
 }
+
+.nav-item .nav-link.active span {
+  background-color: #0d6efd!important;
+}

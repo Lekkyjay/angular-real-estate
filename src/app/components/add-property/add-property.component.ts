@@ -116,29 +116,6 @@ export class AddPropertyComponent implements OnInit {
   }
 
 
-  //Delete this later
-  onSubmit_delete() {
-    this.nextClicked = true
-    if (this.allTabsValid()) {
-      this.mapProperty();
-      this.housingService.addProperty(this.property);
-      this.authService.onSuccess('Propert listed successfully')
-      console.log('Congrats, your property has been listed successfully on our website');
-      console.log(this.addPropertyForm);
-
-      if(this.SellRent.value === '2') {
-        // this.housingService.getSellRentProperties()
-        this.router.navigate(['/rent-property']);
-      } else {
-        // this.housingService.getSellRentProperties()
-        this.router.navigate(['/']);
-      }
-
-    } else {
-      this.authService.onError('Please review the form and provide all valid entries');
-    }
-  }
-
   mapProperty(): void {
     // this.property.Id = this.housingService.newPropID();
     this.property.SellRent = +this.SellRent.value;
