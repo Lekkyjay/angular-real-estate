@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddPropertyComponent } from './components/add-property/add-property.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MyPropertiesComponent } from './components/my-properties/my-properties.component';
 import { PropertyDetailComponent } from './components/property-detail/property-detail.component';
 import { PropertyListComponent } from './components/property-list/property-list.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
@@ -10,6 +11,7 @@ import { PropertyDetailResolverService } from './services/property-detail-resolv
 
 const routes: Routes = [
   {path: '', component: PropertyListComponent},
+  {path: 'properties/my', component: MyPropertiesComponent},
   {path: 'properties/:type', component: PropertyListComponent},
   {path: 'add-property', component: AddPropertyComponent},
   {path: 'property-detail/:id', component: PropertyDetailComponent 
