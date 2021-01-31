@@ -1,1 +1,39 @@
-<p>dashboard works!</p>
+<div class="profile">
+  <h1 class="text-secondary">{{ user?.userName + "'s" }} Dashboard</h1>
+  <div><img [src]="imgUrl" alt="" width="250px"></div> 
+</div>
+
+<div class="container overflow-hidden mt-4" style="width: 80%;">
+  <div class="row gy-5">
+    <div class="col-6">
+      <div class="p-3 border bg-light">Username</div>
+    </div>
+    <div class="col-6">
+      <div class="p-3 border bg-light">{{ user?.userName }}</div>
+    </div>
+    <div class="col-6">
+      <div class="p-3 border bg-light">Email:</div>
+    </div>
+    <div class="col-6">
+      <div class="p-3 border bg-light">{{ user?.email }}</div>
+    </div>
+    <div class="col-6">
+      <div class="p-3 border bg-light">Mobile:</div>
+    </div>
+    <div class="col-6">
+      <div class="p-3 border bg-light">{{ user?.mobile }}</div>
+    </div>
+    <div class="col-6">
+      <div class="p-3 border bg-light">Properties for sale</div>
+    </div>
+    <div class="col-6">
+      <div class="p-3 border bg-light">2</div>
+    </div>
+    <div class="col-6">
+      <div class="p-3 border bg-light">Properties for rent</div>
+    </div>
+    <div class="col-6">
+      <div class="p-3 border bg-light">2</div>
+    </div>
+  </div>
+</div>

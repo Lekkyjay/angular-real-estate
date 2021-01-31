@@ -34,7 +34,10 @@ export class PropertyListComponent implements OnInit, OnDestroy {
           )
         )
       })
-    ).subscribe(properties => this.properties = properties)
+    ).subscribe(properties => {
+      this.housingService.sellRentTotal.next(properties)
+      this.properties = properties
+    })
   }
 
   onCityFilter() {

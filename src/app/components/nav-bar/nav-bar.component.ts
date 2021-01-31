@@ -24,6 +24,7 @@ export class NavBarComponent implements OnInit {
   myProps: boolean
   user: UserI
   properties: any
+  testProperties: any
 
   constructor(
     private router: Router,
@@ -41,10 +42,11 @@ export class NavBarComponent implements OnInit {
       }
     });
 
-    this.housingService.getAllProperties().valueChanges().subscribe(properties => {
-      this.all = properties.length
-      this.sellNum = properties.filter(p => p.SellRent === 1).length
-      this.rentNum = properties.filter(p => p.SellRent === 2).length
+    this.housingService.sellRentTotal$.subscribe(properties => {
+      console.log('properties:', properties)
+      this.all = properties?.length
+      this.sellNum = properties?.filter(p => p.SellRent === 1).length
+      this.rentNum = properties?.filter(p => p.SellRent === 2).length
     })
 
     this.authService.appUser$.subscribe(appUser => this.user = appUser)
@@ -57,8 +59,8 @@ export class NavBarComponent implements OnInit {
       .subscribe(
         properties => {
           this.myAll = properties.length
-          this.mySell = properties.filter(p => p.SellRent === 1).length
-          this.myRent = properties.filter(p => p.SellRent === 2).length
+          // this.mySell = properties.filter(p => p.SellRent === 1).length
+          // this.myRent = properties.filter(p => p.SellRent === 2).length
         }
       )       
   }

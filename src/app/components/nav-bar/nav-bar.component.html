@@ -6,42 +6,21 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">        
-        <ng-container *ngIf="myProps; else allProps">
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="properties/my">All
-              <span class="badge bg-primary">{{myAll}}</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="properties/msell">Buy
-              <span class="badge bg-primary">{{mySell}}</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="properties/mrent">Rent 
-              <span class="badge bg-primary">{{myRent}}</span>
-            </a>
-          </li>
-        </ng-container>
-
-        <ng-template #allProps>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/">All
-              <span class="badge bg-primary">{{all}}</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="properties/sell">Buy
-              <span class="badge bg-primary">{{sellNum}}</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="properties/rent">Rent 
-              <span class="badge bg-primary">{{rentNum}}</span>
-            </a>
-          </li>
-        </ng-template>        
-        
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">All
+            <span class="badge bg-primary">{{all}}</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="properties/sell">Buy
+            <span class="badge bg-primary">{{sellNum}}</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="properties/rent">Rent 
+            <span class="badge bg-primary">{{rentNum}}</span>
+          </a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/add-property">List Property</a>
         </li>        

@@ -11,8 +11,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class HousingService {
 
-  sellRentTotal = new BehaviorSubject<any[]>(null)
-  sellRentTotal$ = this.sellRentTotal.asObservable()
+  sellRentTotal = new BehaviorSubject<any[]>(null)        //sender
+  sellRentTotal$ = this.sellRentTotal.asObservable()      //receiver
   total: any[]
   userId: string
 

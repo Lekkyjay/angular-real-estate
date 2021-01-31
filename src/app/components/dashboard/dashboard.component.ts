@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
 
   properties: any
   user: UserI
+  imgUrl: string = '/assets/images/user-icon.png'
 
   constructor(private afa: AngularFireAuth, private authService: AuthService, private housingService: HousingService) { }
 
