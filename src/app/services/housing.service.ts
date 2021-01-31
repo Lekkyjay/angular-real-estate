@@ -22,10 +22,6 @@ export class HousingService {
 
   createProperty(property: Property, userId: string) {
     let newProperty = Object.assign({}, {userId: userId}, property)
-    // let newProperty = {userId, ...property}
-    // console.log('userId:', userId)
-    // console.log('property:', property)
-    // console.log('newProperty:', newProperty)
     return this.afs.collection('properties').add(newProperty);
   }
 

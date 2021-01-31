@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { Property } from 'src/app/models/property';
 import { HousingService } from 'src/app/services/housing.service';
 
 @Component({
@@ -20,13 +19,8 @@ export class PropertyListComponent implements OnInit, OnDestroy {
   SortbyParam = '';
   SortDirection = 'asc';
   propertySubscription: Subscription  
-
-  private filteredProperties = new BehaviorSubject<Property[]>([])      //sender
-  filteredProperties$ = this.filteredProperties.asObservable()          //receiver
   
-  constructor(
-    private route: ActivatedRoute, 
-    private housingService: HousingService) { }
+  constructor(private route: ActivatedRoute, private housingService: HousingService) { }
 
   ngOnInit(): void {
     this.propertySubscription = this.route.paramMap.pipe(
@@ -40,10 +34,7 @@ export class PropertyListComponent implements OnInit, OnDestroy {
           )
         )
       })
-    ).subscribe(properties => {
-      this.properties = properties
-      this.filteredProperties.next(properties)
-    })
+    ).subscribe(properties => this.properties = properties)
   }
 
   onCityFilter() {

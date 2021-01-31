@@ -46,10 +46,6 @@
           <a class="nav-link" routerLinkActive="active" routerLink="/add-property">List Property</a>
         </li>        
 
-        <li *ngIf="properties$ | async as properties" class="nav-item text-primary">
-          {{ properties.length }}
-        </li>
-
       </ul>
       <ul class="d-flex login">
         <li *ngIf="!user">
@@ -71,7 +67,7 @@
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" routerLink="dashboard">
                 View Dashboard
               </a>
             </li>

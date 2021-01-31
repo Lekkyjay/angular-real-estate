@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { switchMap } from 'rxjs/operators';
+import { UserI } from 'src/app/models/user-i';
+import { AuthService } from 'src/app/services/auth.service';
+import { HousingService } from 'src/app/services/housing.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +12,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  properties: any
+  user: UserI
+
+  constructor(private afa: AngularFireAuth, private authService: AuthService, private housingService: HousingService) { }
 
   ngOnInit(): void {
+    this.authService.appUser$.subscribe(appUser => this.user = appUser)
+
+    this.afa.authState.pipe(
+      switchMap(user => {
+        console.log(user)
+        let id = user.uid
+        return this.housingService.getMyProperties(id).valueChanges()
+      }))
+      .subscribe(properties => this.properties = properties) 
   }
 
 }
