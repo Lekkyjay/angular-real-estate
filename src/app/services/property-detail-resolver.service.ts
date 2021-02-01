@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, take, tap } from 'rxjs/operators';
 import { Property } from '../models/property';
 import { HousingService } from './housing.service';
 
@@ -14,9 +14,12 @@ export class PropertyDetailResolverService implements Resolve<Property> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):Observable<Property>|Property {
     const propId = route.params['id'];
-    return this.housingService.getProperty(propId).pipe(   //It returns here an Observable of Property if there was no error from API
+
+    //returns an Observable of Property or redirects to home if there was any error from API
+    return this.housingService.getProperty(propId).pipe(  
+      take(1),    //takes 1 response then completes the observable from angularFire
       catchError(error => {
-        console.log(error)
+        console.log('i got here in resolver error:', error)
         this.router.navigate(['/']);
         return of(null);
       })

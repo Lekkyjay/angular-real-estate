@@ -14,8 +14,8 @@ const routes: Routes = [
   {path: 'properties/my', component: MyPropertiesComponent},
   {path: 'properties/:type', component: PropertyListComponent},
   {path: 'add-property', component: AddPropertyComponent},
-  {path: 'property-detail/:id', component: PropertyDetailComponent 
-        /*  resolve: {prp: PropertyDetailResolverService} */
+  {path: 'property-detail/:id', component: PropertyDetailComponent, 
+          resolve: {prp: PropertyDetailResolverService}
         },
   {path: 'user/login', component: UserLoginComponent},
   {path: 'user/register', component: UserRegisterComponent},

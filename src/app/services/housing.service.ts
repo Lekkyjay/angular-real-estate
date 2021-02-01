@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Property } from '../models/property';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -56,8 +57,8 @@ export class HousingService {
    } 
   }
 
-  getProperty(id: string) {
-    return this.afs.doc(`properties/${id}`).valueChanges()
+  getProperty(id: string) :Observable<Property> {
+    return this.afs.doc<Property>(`properties/${id}`).valueChanges()
   }
 
   getMyProperties(id: string) {
