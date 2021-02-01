@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { HousingService } from 'src/app/services/housing.service';
 
 @Component({
@@ -26,11 +26,17 @@ export class MyPropertiesComponent implements OnInit {
     this.propertySubscription = this.afa.authState.pipe(
       switchMap(user => {
         let id = user.uid
-        return this.housingService.getMyProperties(id).valueChanges()
-      }))
-      .subscribe(properties => {
-        this.properties = properties
-      })       
+        return this.housingService.getMyProperties(id).snapshotChanges().pipe(
+          map(properties => 
+            properties.map(property => (
+              { Id: property.payload.doc.id, ...property.payload.doc.data() }
+            ))
+          )
+        )
+      })
+    ).subscribe(properties => {
+      this.properties = properties
+    })
   }
 
   onCityFilter() {
