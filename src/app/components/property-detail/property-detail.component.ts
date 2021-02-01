@@ -21,7 +21,6 @@ export class PropertyDetailComponent implements OnInit {
     // this.propertyId = +this.route.snapshot.params['id'];
     this.route.data.subscribe(
       (data: Property) => {
-        console.log('i got here with resolver data')
         this.property = data['prp'];
       }
     )

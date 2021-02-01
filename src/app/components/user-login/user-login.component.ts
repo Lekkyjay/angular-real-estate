@@ -20,7 +20,6 @@ export class UserLoginComponent implements OnInit {
   }
 
   onLogin(loginForm: NgForm) {
-    console.log(loginForm.value);
     const token = this.authService.authUser(loginForm.value); //returns authenticated user
     if (token) {
       localStorage.setItem('token', token.userName);

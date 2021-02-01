@@ -41,8 +41,6 @@ export class UserRegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.regForm.value)
-    console.log('userData', this.userData())
     this.userSubmitted = true
     if (this.regForm.valid) {
       this.authService.createUser(this.userData())
@@ -56,7 +54,6 @@ export class UserRegisterComponent implements OnInit {
    
 
   onSubmitToLocalStorage() {
-    console.log(this.regForm.value)
     this.userSubmitted = true
     if (this.regForm.valid) {
       // this.user = Object.assign(this.user, this.regForm.value)

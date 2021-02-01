@@ -19,7 +19,6 @@ export class PropertyDetailResolverService implements Resolve<Property> {
     return this.housingService.getProperty(propId).pipe(  
       take(1),    //takes 1 response then completes the observable from angularFire
       catchError(error => {
-        console.log('i got here in resolver error:', error)
         this.router.navigate(['/']);
         return of(null);
       })

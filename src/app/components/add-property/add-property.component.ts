@@ -95,18 +95,11 @@ export class AddPropertyComponent implements OnInit {
     this.nextClicked = true
     if (this.allTabsValid()) {
       this.mapProperty();
-      // console.log('property:', this.property)
-      // console.log('userId:', this.userId)
       this.housingService.createProperty(this.property, this.userId);
       this.authService.onSuccess('Propert listed successfully')
-      console.log('Congrats, your property has been listed successfully on our website');
-      console.log(this.addPropertyForm);
-
       if(this.SellRent.value === '2') {
-        // this.housingService.getSellRentProperties()
         this.router.navigate(['/rent-property']);
       } else {
-        // this.housingService.getSellRentProperties()
         this.router.navigate(['/']);
       }
 
@@ -117,7 +110,6 @@ export class AddPropertyComponent implements OnInit {
 
 
   mapProperty(): void {
-    // this.property.Id = this.housingService.newPropID();
     this.property.SellRent = +this.SellRent.value;
     this.property.BHK = this.BHK.value;
     this.property.PType = this.PType.value;

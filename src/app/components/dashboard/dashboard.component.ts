@@ -23,7 +23,6 @@ export class DashboardComponent implements OnInit {
 
     this.afa.authState.pipe(
       switchMap(user => {
-        console.log(user)
         let id = user.uid
         return this.housingService.getMyProperties(id).valueChanges()
       }))

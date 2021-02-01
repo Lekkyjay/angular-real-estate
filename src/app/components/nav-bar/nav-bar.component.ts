@@ -35,7 +35,7 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe((event:Event) => {
       if(event instanceof NavigationEnd ){
-        console.log('event:', event.url);
+        // console.log('event:', event.url);
         (event.url === '/properties/mysell' || 
         event.url === '/properties/myrent' ||
         event.url === '/properties/my') ? this.myProps = true : this.myProps = false
@@ -43,7 +43,6 @@ export class NavBarComponent implements OnInit {
     });
 
     this.housingService.getAllProperties().valueChanges().subscribe(properties => {
-      console.log('properties:', properties)
       this.all = properties?.length
       this.sellNum = properties?.filter(p => p.SellRent === 1).length
       this.rentNum = properties?.filter(p => p.SellRent === 2).length

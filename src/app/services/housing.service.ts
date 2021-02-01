@@ -26,7 +26,6 @@ export class HousingService {
   }
   
   getProperties(type: string) {
-    console.log('I got here:', type)
     switch(type) { 
       case "sell": { 
         return this.afs.collection<Property>('properties', ref => ref.where('SellRent', '==', 1)) 
